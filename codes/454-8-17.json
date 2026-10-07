@@ -1,6 +1,6 @@
 {
   "schema_version": "0.2",
-  "name": "[[454,8,17]] reduced single-layer planar bivariate-bicycle code (L=16)",
+  "name": "[[454,8,17]] reduction of [[457,8,17]]",
   "code_type": "CSS",
   "n": 454,
   "k": 8,
@@ -63,11 +63,11 @@
       ],
       [
         11,
-        239,
-        240
+        12,
+        13,
+        239
       ],
       [
-        12,
         13,
         240
       ],
@@ -1643,6 +1643,11 @@
     ],
     "Z": [
       [
+        28,
+        43,
+        255
+      ],
+      [
         0,
         29,
         228,
@@ -1740,7 +1745,6 @@
         11,
         12,
         41,
-        240,
         253,
         266
       ],
@@ -1748,13 +1752,9 @@
         12,
         13,
         42,
+        240,
         254,
         267
-      ],
-      [
-        28,
-        43,
-        255
       ],
       [
         44,
@@ -3283,38 +3283,38 @@
       "value": 17,
       "confidence": "upper_bound",
       "witness": [
-        10,
-        39,
-        40,
         86,
         118,
         119,
         164,
         195,
         219,
-        221,
-        269,
+        239,
+        252,
+        254,
+        267,
         282,
         375,
         377,
         391,
         406,
-        420
+        420,
+        447
       ],
       "witness_provenance": {
         "found_by": [
           "@dorakingx"
         ],
-        "date": "2026-09-09",
+        "date": "2026-10-08",
         "found_at_samples": 20000,
         "survived_samples": 20000000,
         "tool": "gf2_fast RIS ladder (verify/gf2_fast.cpp), both sides searched jointly",
         "seeds": [
-          77001,
-          77138,
-          77275,
-          77412,
-          880001
+          777001,
+          777138,
+          777275,
+          777412,
+          777549
         ]
       }
     },
@@ -3344,17 +3344,17 @@
         "found_by": [
           "@dorakingx"
         ],
-        "date": "2026-09-09",
+        "date": "2026-10-08",
         "found_at_samples": 4000,
         "survived_samples": 20000000,
         "tool": "gf2_fast RIS in the packaging search; the ladder searched both sides jointly",
         "seeds": [
           7,
-          77001,
-          77138,
-          77275,
-          77412,
-          880001
+          777001,
+          777138,
+          777275,
+          777412,
+          777549
         ]
       }
     }
@@ -3363,13 +3363,12 @@
     "authors": [
       "@dorakingx"
     ],
-    "construction": "Open-boundary planar bivariate-bicycle code (Liang, Eberhardt, Chen, arXiv:2504.08887, Sec. II and Table V) with f = x + x^2 + y^2 and g = 1 + x^2 y + x^2 y^2 on a 16 x 16 grid (research/local2d/planar.py build_open_directional(16, 16), n = 2*16^2 = 512, k = 8), then reduced to n = 454 by 58 qubit removals of three kinds. (36) Restricted r=1 lattice grafting (Sec. III E): a qubit lying in exactly one stabilizer of some type is removed together with that stabilizer; accepted only if k stayed 8 and a bit-packed RIS search found nothing lighter than 17, screened at 20000 trials with a FIXED seed and then confirmed at a deeper rung, a qubit failing the confirm rung being blacklisted. Those in-loop rungs are a filter, not the evidence -- on other members of this family they let a unit of distance through -- so the claim below rests on the separate fresh-seed ladder. Its upper bound for this code equals the unreduced L = 16 code's own ladder bound, which is consistent with the reduction having lost nothing at this size but does not prove it: both are upper bounds, no lower bound exists for either, and a MILP asked whether any logical of weight below the claim exists hit its time limit with no verdict. (19) Weight-1 stabilizer cleanup, which runs no distance search at all because it needs none (Sec. III D step 4, research/local2d/boundary_engine.py _cleanup): a qubit carrying a weight-1 stabilizer cannot appear in any opposite-type check, so multiplying that row into the same-type rows containing it and deleting the qubit preserves k and the distance exactly; the elimination cascades until no weight-1 or zero-degree qubit is left. (3) Capped r=2 merge-graft, a new step: when a qubit lies in exactly two stabilizers R1, R2 of one type, replacing R2 by R1 + R2 is a row operation on the stabilizer generators and so changes no code, only the generating set, and it leaves that qubit in one stabilizer, where the r=1 graft above applies. The merge is taken only if R1 + R2 still has weight at most 6 and its support still has maximum pairwise distance at most 4 in the layout below -- exactly the quantity the verifier measures as the interaction radius -- so the weight class and the 2D-local single-layer class are preserved by construction; the resulting graft is then accepted under the same k check and the same screen and confirm rungs, and the whole layout radius is recomputed after every accepted move. The first two moves cannot enlarge a check support -- grafting deletes, and the cleanup XOR removes exactly the one fixed qubit from a row -- while the third can, and here did: one accepted merge replaced two weight-3 checks of diameter 2.2361 by a single weight-4 check of diameter 3.0000. The caps bound that growth rather than forbidding it, and the whole layout is re-measured after every accepted move, which is why the code below still has max check weight 6 and radius exactly 4. SINGLE-LAYER integer layout: a surviving qubit whose index in the unreduced code is q = c*256 + i*16 + j (block c in {0,1}, site (i,j)) sits at (i + j, j - i + c), the unit square lattice rotated 45 degrees with the two blocks on its two sublattices; one qubit per site, minimum spacing exactly 1, maximum check diameter exactly 4. The reduction is a randomised search, so the surviving qubit set is recorded by the coordinates in this file rather than re-derived.",
+    "construction": "Reduction of the board's codes/457-8-17.json ([[457,8,17]]) by 3 qubits at unchanged k, unchanged check-weight class and unchanged locality class, by one move applied to a fixpoint: graft a qubit away using a low-weight element of the stabilizer ROW SPACE. Let S be an element of the row space of H_X with support T and let a be in T. Replace one generator of the subset summing to S by S itself -- the span is unchanged, that generator being S plus the rest of the subset -- and add S into every other X row meeting a, so that a survives only in S. Then apply the CNOT fan-out from a to T\\{a}, which acts on the check matrices as H_X[:, b] ^= H_X[:, a] and H_Z[:, a] ^= H_Z[:, b] for each b in T\\{a}. Only S still meets a, so the first substitution turns S into the weight-1 stabilizer X_a and leaves every other X row alone; the second zeroes column a of H_Z, because commutation forces every Z row to meet T an even number of times. Qubit a is then disentangled and is deleted: n -> n-1, k unchanged, and the Z rows only LOSE an index, so their weights and support diameters cannot rise. The weight of S separates three regimes, and the difference is entirely in the clearing step R ^= S. |S| = 1: nothing is added anywhere, so the weights, the radius AND THE DISTANCE are all preserved exactly, and no distance search is needed -- this is the row-space form of the weight-1 stabilizer cleanup of Liang, Eberhardt and Chen (arXiv:2504.08887 Sec. III D step 4), which the implementation in research/local2d/boundary_engine.py applies only to literal weight-1 generator ROWS. |S| = 2: R loses a and toggles one other index, so its weight changes by 0 or -2 and can never rise. |S| >= 3: R can grow, so every touched row is checked against the code's weight class and its locality radius, measured in the source's own layout. This generalises the capped merge-graft I introduced with [[454,8,17]], which only ever built S from the generators a single qubit happens to lie in. Here the accepted grafts were . Low-weight row-space elements are enumerated as sums of at most three checks with a connected overlap pattern. Every graft with |S| >= 2 was accepted only if k was unchanged and a bit-packed RIS search found nothing lighter than 17, screened once and confirmed twice with independent seeds; those in-loop rungs are a filter, not the evidence. QUBIT POSITIONS ARE THE SOURCE'S: every surviving qubit keeps the coordinate it has in codes/457-8-17.json, so the layout is inherited rather than re-derived, and the reduction only deletes. The surviving qubits' indices into the source numbering are [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]... (full list implied by the coordinates in this file).",
     "references": [
-      "arXiv:2504.08887",
-      "arXiv:2308.07915"
+      "arXiv:2504.08887"
     ],
-    "date": "2026-09-09",
-    "notes": "Checked, not equivalent to any board entry: the gate reports no exact duplicate and no WL-equivalent entry. The one board entry with n = 454 is [[454,2,33]] (no 2D layout), which differs in k and d. It dominates [[457,8,17]] on (n, k, d, w), which therefore leaves the frontier of every cell the two share. The ungrafted L = 16 member ([[512,8,...]]) is not on the board either. Both the construction and the grafting technique are published (arXiv:2504.08887, Sec. II, Sec. III D step 4 and Sec. III E; this repository's own research/local2d modules cite Table V of that paper for the family's ungrafted distances and Tables II-IV for its qubit-removal layouts such as [[188,8,9]], which come out of the cleanup rather than the graft), but this parameter set, the capped r=2 merge-graft step and this single-layer layout are not, so novelty is left unknown and literature novelty is unverified.",
+    "date": "2026-10-08",
+    "notes": "Derived from codes/457-8-17.json, not an independent construction; that entry is my own earlier reduction, and this one goes further with a larger move set. The gate reports no exact duplicate and no WL-equivalent entry. It dominates [[457,8,17]] on (n, k, d, w), which therefore leaves the frontier of every cell the two share. The measured interaction radius is unchanged at 4, so the reduced code is no less local than the source. Distance is a witness-backed upper bound: the deepest null result is 20000000 fresh-seed RIS trials. Literature novelty is unverified.",
     "model": "Claude Opus 5 (Claude Code)",
     "origin": "submission",
     "novelty": "unknown"
@@ -4338,8 +4337,8 @@
         13.0
       ],
       [
-        13.0,
-        14.0
+        14.0,
+        15.0
       ],
       [
         2.0,
