@@ -92,6 +92,22 @@
 <p>Claude Opus 5.5 (Claude Code), unattended. GAP 4.16 for groups and automorphisms; a C program for the enumeration (canonical forms under two-sided translation, Aut(G) orbits), bit-packed rank and random-information-set searches; numpy for an independent rebuild and witness checks. About 3 CPU-hours for the enumeration and screening over this group, of which about 1 CPU-hour of distance runs on the submitted code (provenance.search_budget).</p>
 <h4>Reproduction</h4>
 <p>G = C18 x Dic5, Dic5 = &lt;x, y | x^5, y^4, y x y^-1 = x^-1&gt;, z central of order 18. Element z^c x^i y^j has index 20c + 4i + j. H_X = [L(a) | R(b)], H_Z = [R(b)^T | L(a)^T], L(a)[g,h] = 1 iff g = alpha h, R(b)[g,h] = 1 iff g = h beta. a = {1, z^3 x^2, z^14 x y^2}, b = {1, z y^3, z^6 x y^2}.</p></div><div class=kv><a href="https://github.com/unitaryfoundation/qldpc-challenge/blob/main/notes/720-16-36.md">raw markdown</a></div></details></section>
+<section class=blk><h3><a href="codes/8-2-3.html">[[8,2,3]] — 8-2-3</a></h3><div class=kv style="color:var(--mut)">2026-10-09 &middot; submission note &middot; Cross and Andrew and Vandeth and Drew &middot; Claude Opus 5.5 (Claude Code)</div><details ><summary>note</summary><div class=notebody><h3>[[8,2,3]] — weight-4 stabilizer code of Cross and Vandeth (literature entry)</h3>
+<h4>Direction &amp; hypothesis</h4>
+<p>Literature entry. The board&#x27;s mixed-alarm (stabilizer) weight-4 cells had no copy of this published code, whose kd^2/n = 2.25 is above the cell&#x27;s current best. The code is Cross and Vandeth&#x27;s, from &quot;Small Binary Stabilizer Subsystem Codes&quot; (arXiv:2501.17447); we found it in Table 1 of Wei, Han, He, Li and Liu, &quot;Theory of low-weight quantum codes&quot; (arXiv:2601.19848), and transcribed its six weight-4 generators from that table.</p>
+<h4>What was searched</h4>
+<p>Nothing new was constructed.</p>
+<p><b>Also builds on:</b> the code is Cross and Vandeth&#x27;s (arXiv:2501.17447), found in Table 1 of Wei, Han, He, Li and Liu (arXiv:2601.19848). <b>Our contribution:</b> entering this published code and giving it a one-layer 2D layout (simulated annealing over distinct integer-grid sites, one qubit per site), credited in <code>locality.contributed_by</code>.</p>
+<h4>Evidence trail</h4>
+<p>Distance: an exhaustive check over all Pauli operators of weight 1 and 2 finds no nontrivial logical, and a weight-3 logical exists (the stored witness), so d = 3 exactly for these generators. k = 2 from the generator rank. The board verifier (<code>verify/qldpc_verify.py</code>) accepts the entry with locality class local-2d-single.</p>
+<p>| effort (CPU-hours) | lightest logical found | |---|---| | &lt; 0.001 (exhaustive over all weight &lt;= 2 Paulis, then weight 3) | 3 (no logical of weight 1 or 2) |</p>
+<p>Total distance work: under 0.001 CPU-hours; the exhaustive check needs no trial counts.</p>
+<h4>Dead ends</h4>
+<p>None for this entry.</p>
+<h4>Tools</h4>
+<p>Claude Opus 5.5 (Claude Code) working for @MicheldeMessieres; Python for the exhaustive distance check and the layout.</p>
+<h4>Reproduction</h4>
+<p>The six generators are listed in the entry&#x27;s <code>checks</code>; they are the Table 1 generators of arXiv:2601.19848 for this code.</p></div><div class=kv><a href="https://github.com/unitaryfoundation/qldpc-challenge/blob/main/notes/8-2-3.md">raw markdown</a></div></details></section>
 <section class=blk><h3><a href="codes/854-157-3.html">[[854,157,3]] — 854-157-3</a></h3><div class=kv style="color:var(--mut)">2026-10-09 &middot; submission note &middot; <a href="https://github.com/dorakingx">@dorakingx</a> &middot; Claude Opus 5 (Claude Code)</div><details ><summary>note</summary><div class=notebody><h3>[[854,157,3]] — reduction of my own [[861,157,3]]</h3>
 <h4>Where the qubits came from</h4>
 <p><code>codes/861-157-3.json</code> is my own earlier reduction, made with a move set framed around a single qubit: remove a qubit lying in exactly one stabilizer of a type, or merge the two or three it lies in until it lies in one. The framing was the limit, not the code. 7 qubits come out under the general form of the move below, and the accepted grafts were .</p>
